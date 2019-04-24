@@ -3,16 +3,16 @@
     
    background(255, 255, 255);  // Color de fondo pantalla
 
-   //sensoresArduino(true,true,true);
+   sensoresArduino(true,true,true);
 
     //Representar medida NDVI
     //Creamos array y lo rellenamos con entrada de datos
-         float[] FloatNDVIArray30 = float(loadStrings("ndvi.txt"));
+    /*     float[] FloatNDVIArray30 = float(loadStrings("ndvi.txt"));
          String ultimaMedida = str(FloatNDVIArray30[FloatNDVIArray30.length-1]);
           fill(0, 0, 0);  // Determinamos color de la letra
           textFont(font22);  // Determinamos tipo de fuente
           text("NDVI Actual = " + ultimaMedida, 50, height-50); 
-                 
+     */            
     //Mostramos, ocultamos y coloreamos los botones
     botonC.setVisible(true);
       botonC.setLocalColorScheme(G4P.ORANGE_SCHEME);

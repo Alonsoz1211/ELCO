@@ -18,6 +18,7 @@ import meter.*;
   float tempActual = 0;                                        //Variable de temperatura
   float humActual = 0;                                         //Variable de humedad
   float lightActual = 0;                                       //Variable de luminosidad
+  float luxActual = 0;                                       //Variable de luminosidad
 
   int[] PC_Time = new int[3];                            // Variable para registrar la hora
   int[] DD_MM_YY = new int[3];                           // Variable para registrar la fecha
@@ -267,11 +268,12 @@ void setup() {
   
       /*SETUP MEDIDAS PROCEDENTES ARDUINO*/
       
-      //port = new Serial(this, "cu.usbmodem14101", 9600);                                    //Puerto serie Arduino
+      port = new Serial(this, "/dev/cu.usbserial-AL03MSOB", 9600);                                    //Puerto serie Arduino
       
         fill(120, 50, 0);
-        m = new Meter(this, 25, 100);
-        // Adjust font color of meter value  
+        m = new Meter(this, 20, 60);
+        // Adjust font color of meter value 
+        m.setMeterWidth(310);
         m.setTitleFontSize(20);
         m.setTitleFontName("Arial bold");
         m.setTitle("Temperature (C)");
@@ -282,10 +284,10 @@ void setup() {
         m.setScaleLabels(scaleLabelsT);
         m.setScaleFontSize(18);
         m.setScaleFontName("Times New Roman bold");
-        m.setScaleFontColor(color(200, 30, 70));
+        m.setScaleFontColor(color(214, 42, 29));
         
-        m.setArcColor(color(141, 113, 178));
-        m.setArcThickness(10);
+        m.setArcColor(color(158, 185, 229));
+        m.setArcThickness(7);
         m.setMaxScaleValue(80);
         
         m.setNeedleThickness(3);
@@ -299,6 +301,7 @@ void setup() {
         int mw = m.getMeterWidth();
         
         m2 = new Meter(this, mx + mw + 20, my);
+        m2.setMeterWidth(310);
         m2.setTitleFontSize(20);
         m2.setTitleFontName("Arial bold");
         m2.setTitle("Humidity (%)");
@@ -308,10 +311,10 @@ void setup() {
         m2.setScaleLabels(scaleLabelsH);
         m2.setScaleFontSize(18);
         m2.setScaleFontName("Times New Roman bold");
-        m2.setScaleFontColor(color(200, 30, 70));
+        m2.setScaleFontColor(color(214, 42, 29));
         
-        m2.setArcColor(color(141, 113, 178));
-        m2.setArcThickness(10);
+        m2.setArcColor(color(158, 185, 229));
+        m2.setArcThickness(7);
         m2.setMaxScaleValue(100);
         
         m2.setNeedleThickness(3);
@@ -320,8 +323,9 @@ void setup() {
         m2.setMaxInputSignal(100);
         
         // Third meter
-        m3 = new Meter(this, (950/2)-(mw/2), 500);
+        m3 = new Meter(this, (width-buttonSize)/2-mw/2, 270);
         // Adjust font color of meter value  
+        m3.setMeterWidth(310);
         m3.setTitleFontSize(20);
         m3.setTitleFontName("Arial bold");
         m3.setTitle("Light (%)");
@@ -332,16 +336,16 @@ void setup() {
         m3.setScaleLabels(scaleLabelsL);
         m3.setScaleFontSize(18);
         m3.setScaleFontName("Times New Roman bold");
-        m3.setScaleFontColor(color(200, 30, 70));
+        m3.setScaleFontColor(color(214, 42, 29));
         
-        m3.setArcColor(color(141, 113, 178));
-        m3.setArcThickness(10);
-        m3.setMaxScaleValue(80);
+        m3.setArcColor(color(158, 185, 229));
+        m3.setArcThickness(7);
+        m3.setMaxScaleValue(100);
         
         m3.setNeedleThickness(3);
         
         m3.setMinInputSignal(0);
-        m3.setMaxInputSignal(80);
+        m3.setMaxInputSignal(100);
 }
 
 
