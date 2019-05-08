@@ -1,7 +1,7 @@
 
-/* Captura de video de la Pi NoIR Camera V2 */
-GLCapture video;
+GLCapture video; 
 PImage img;
+
 
 
 void camara(GLCapture video, PImage img) {
@@ -47,7 +47,7 @@ void camara(GLCapture video, PImage img) {
     /* Indicamos el NDVIMedio */
     textSize(28);
     fill(0); //Color Negro (RGB)
-    text("NDVI Medio: " + NDVIMedio, 25, height-15);
+    text("Average NDVI: " + NDVIMedio, 25, height-15);
   }
 }
 

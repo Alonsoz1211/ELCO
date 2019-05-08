@@ -3,7 +3,7 @@
     
    background(255, 255, 255);  // Color de fondo pantalla
 
-   //sensoresArduino(true,true,true);
+   sensoresArduino(true,true,true);
 
     //Representar medida NDVI
     //Creamos array y lo rellenamos con entrada de datos
