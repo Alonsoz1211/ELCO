@@ -115,6 +115,7 @@ float [][] ndvi (float[][] MatrizRojo, float [][] MatrizAzul, float[][] NDVI) {
           pixels[loc]=color(r, 255, 0);
         } else {
           pixels[loc]=color(255, g, 0);
+
         }
       }
     }

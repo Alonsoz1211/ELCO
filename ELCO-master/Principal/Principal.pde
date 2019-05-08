@@ -18,7 +18,6 @@ import meter.*;
   float tempActual = 0;                                        //Variable de temperatura
   float humActual = 0;                                         //Variable de humedad
   float lightActual = 0;                                       //Variable de luminosidad
-  float luxActual = 0;                                       //Variable de luminosidad
 
   int[] PC_Time = new int[3];                            // Variable para registrar la hora
   int[] DD_MM_YY = new int[3];                           // Variable para registrar la fecha
@@ -26,7 +25,21 @@ import meter.*;
   String curr_time, curr_date;                           // Variables para obtención de tiempo, hora, texto informativo inferior y nombre log
   PImage logoPLANTHY, logoUPM, logoETSIT;                                           // Creamos un objeto para cargar una imagen 
 
-
+  //Arrays pintar graficas
+  String[] Date0Hour1Ndvi2;
+  String[] DateHourNdvi;  
+  String[] Date0Hour1HUM2;
+  String[] DateHourHUM;  
+  String[] Date0Hour1TEMP2;
+  String[] DateHourTEMP;  
+  String[] Date0Hour1LUZ2;
+  String[] DateHourLUZ;
+  String[] Date0;
+  float Ndvi2;
+  float HUM2;
+  float TEMP2;
+  float LUZ2;
+  
   //Declaramos botones
   GButton botonC;
   GButton botonS;
@@ -39,6 +52,7 @@ import meter.*;
   GButton boton24HORAS;
   GButton boton7DIAS;
   GButton boton30DIAS;
+  GButton botonOFF;
     
   // Plot from grafica library
   GPlot plotNDVI;
@@ -147,9 +161,10 @@ void setup() {
       botonGHum = new GButton(this, button2Width, height-button2Height, button2Width, button2Height, "HUMEDAD");
       botonGTemp = new GButton(this, button2Width*2, height-button2Height, button2Width, button2Height, "TEMPERATURA");
       botonGLuz = new GButton(this, button2Width*3, height-button2Height, button2Width, button2Height, "LUZ");
-      boton24HORAS = new GButton(this, width-buttonSize-button3Width*3, 10, button3Width, button3Width, "24 HORAS");
-      boton7DIAS = new GButton(this, width-buttonSize-button3Width*2, 10, button3Width, button3Width, "7 DIAS");
-      boton30DIAS = new GButton(this, width-buttonSize-button3Width, 10, button3Width, button3Width, "30 DIAS");
+      boton24HORAS = new GButton(this, width-buttonSize-button3Width*3.5, 5, button3Width, button3Width, "24 HORAS");
+      boton7DIAS = new GButton(this, width-buttonSize-button3Width*2.5, 5, button3Width, button3Width, "7 DIAS");
+      boton30DIAS = new GButton(this, width-buttonSize-button3Width*1.5, 5, button3Width, button3Width, "30 DIAS");
+      botonOFF = new GButton(this, 5, 5, button3Width/2, button3Width/2, "○");
   
   
   
@@ -268,12 +283,11 @@ void setup() {
   
       /*SETUP MEDIDAS PROCEDENTES ARDUINO*/
       
-      port = new Serial(this, "/dev/cu.usbserial-AL03MSOB", 9600);                                    //Puerto serie Arduino
+      //port = new Serial(this, "cu.usbmodem14101", 9600);                                    //Puerto serie Arduino
       
         fill(120, 50, 0);
-        m = new Meter(this, 20, 60);
-        // Adjust font color of meter value 
-        m.setMeterWidth(310);
+        m = new Meter(this, 25, 100);
+        // Adjust font color of meter value  
         m.setTitleFontSize(20);
         m.setTitleFontName("Arial bold");
         m.setTitle("Temperature (C)");
@@ -284,10 +298,10 @@ void setup() {
         m.setScaleLabels(scaleLabelsT);
         m.setScaleFontSize(18);
         m.setScaleFontName("Times New Roman bold");
-        m.setScaleFontColor(color(214, 42, 29));
+        m.setScaleFontColor(color(200, 30, 70));
         
-        m.setArcColor(color(158, 185, 229));
-        m.setArcThickness(7);
+        m.setArcColor(color(141, 113, 178));
+        m.setArcThickness(10);
         m.setMaxScaleValue(80);
         
         m.setNeedleThickness(3);
@@ -301,7 +315,6 @@ void setup() {
         int mw = m.getMeterWidth();
         
         m2 = new Meter(this, mx + mw + 20, my);
-        m2.setMeterWidth(310);
         m2.setTitleFontSize(20);
         m2.setTitleFontName("Arial bold");
         m2.setTitle("Humidity (%)");
@@ -311,10 +324,10 @@ void setup() {
         m2.setScaleLabels(scaleLabelsH);
         m2.setScaleFontSize(18);
         m2.setScaleFontName("Times New Roman bold");
-        m2.setScaleFontColor(color(214, 42, 29));
+        m2.setScaleFontColor(color(200, 30, 70));
         
-        m2.setArcColor(color(158, 185, 229));
-        m2.setArcThickness(7);
+        m2.setArcColor(color(141, 113, 178));
+        m2.setArcThickness(10);
         m2.setMaxScaleValue(100);
         
         m2.setNeedleThickness(3);
@@ -323,9 +336,8 @@ void setup() {
         m2.setMaxInputSignal(100);
         
         // Third meter
-        m3 = new Meter(this, (width-buttonSize)/2-mw/2, 270);
+        m3 = new Meter(this, (950/2)-(mw/2), 500);
         // Adjust font color of meter value  
-        m3.setMeterWidth(310);
         m3.setTitleFontSize(20);
         m3.setTitleFontName("Arial bold");
         m3.setTitle("Light (%)");
@@ -336,16 +348,16 @@ void setup() {
         m3.setScaleLabels(scaleLabelsL);
         m3.setScaleFontSize(18);
         m3.setScaleFontName("Times New Roman bold");
-        m3.setScaleFontColor(color(214, 42, 29));
+        m3.setScaleFontColor(color(200, 30, 70));
         
-        m3.setArcColor(color(158, 185, 229));
-        m3.setArcThickness(7);
-        m3.setMaxScaleValue(100);
+        m3.setArcColor(color(141, 113, 178));
+        m3.setArcThickness(10);
+        m3.setMaxScaleValue(80);
         
         m3.setNeedleThickness(3);
         
         m3.setMinInputSignal(0);
-        m3.setMaxInputSignal(100);
+        m3.setMaxInputSignal(80);
 }
 
 

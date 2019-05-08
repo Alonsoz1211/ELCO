@@ -26,11 +26,11 @@
           }
           
         camara(cam,img);                                            //Llamamos a la funcion camara
-        
+        //println("ndvi.txt",  DD_MM_YY[0] + "/" + DD_MM_YY[1] + "/" + DD_MM_YY[2] + "   " + PC_Time[0] + ":" + PC_Time[1] + "   " + NDVIMedio);
           if(PC_Time[2] == 30){                                     //Tomamos la medida a los 30 segundos de que se abra la camara (estabilidad)
             medidoNDVI = true;                                      //Activamos el Flag de que el NDVI ha sido medido
             String NDVIMedioString = String.valueOf(NDVIMedio);     //Pasamos el NDVI medio a String
-            appendTextToFile("ndvi.txt", NDVIMedioString);          //Pasamos el NDVI medio de la imagen al archivo de texto
+            appendTextToFile("ndvi.txt",  DD_MM_YY[0] + "/" + DD_MM_YY[1] + "/" + DD_MM_YY[2] + "   " + PC_Time[0] + ":" + PC_Time[1] + "   " + NDVIMedioString);          //Pasamos el NDVI medio de la imagen al archivo de texto
             println(NDVIMedioString);
             
               if(!CAMARA){                                          //Si en este momento no estamos en la pestaña de camara
@@ -61,8 +61,8 @@
                   medidoHum = true;                                                     //Activamos el Flag de medida periodica
                  
                   String humedadString = String.valueOf(humActual);                    //Pasamos el valor medido a String
-                  appendTextToFile("humedad.txt", humedadString);                      //Pasamos el valor de humedad al archivo de texto
-               
+                  appendTextToFile("humedad.txt",  DD_MM_YY[0] + "/" + DD_MM_YY[1] + "/" + DD_MM_YY[2] + "   " + PC_Time[0] + ":" + PC_Time[1] + "   " + humedadString);     //Pasamos el valor de humedad al archivo de texto      
+
                   ARDUINOperiodico = false;                                            //Indicamos que termina la funcion de medida periodica 
                 } 
                 
@@ -81,7 +81,7 @@
                   medidoTemp = true;                                                  //Activamos el Flag de medida periodica
 
                   String temperaturaString = String.valueOf(tempActual);                //Pasamos el valor medido a String
-                  appendTextToFile("temperatura.txt", temperaturaString);              //Pasamos el valor de temperatura al archivo de texto
+                  appendTextToFile("temperatura.txt", DD_MM_YY[0] + "/" + DD_MM_YY[1] + "/" + DD_MM_YY[2] + "   " + PC_Time[0] + ":" + PC_Time[1] + "   " + temperaturaString);              //Pasamos el valor de temperatura al archivo de texto
                
                   ARDUINOperiodico = false;                                            //Indicamos que termina la funcion de medida periodica 
                 }
@@ -101,7 +101,7 @@
                   medidoLuz = true;                                                  //Activamos el Flag de medida periodica
           
                   String luzString = String.valueOf(lightActual);                      //Pasamos el valor medido a String
-                  appendTextToFile("luz.txt", luzString);                            //Pasamos el valor de luz al archivo de texto
+                  appendTextToFile("luz.txt", DD_MM_YY[0] + "/" + DD_MM_YY[1] + "/" + DD_MM_YY[2] + "   " + PC_Time[0] + ":" + PC_Time[1] + "   " + luzString);                            //Pasamos el valor de luz al archivo de texto
                   
                   ARDUINOperiodico = false;                                          //Indicamos que termina la funcion de medida periodica 
                }

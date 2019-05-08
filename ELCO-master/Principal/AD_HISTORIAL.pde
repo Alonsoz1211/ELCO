@@ -19,7 +19,10 @@
       botonA.setLocalColorScheme(G4P.ORANGE_SCHEME);
       botonA.setLocalColor(2, color(0));  
 
-    
+    //Boton OFF
+    botonOFF.setVisible(true);
+    botonOFF.setLocalColorScheme(G4P.GREEN_SCHEME);
+    botonOFF.setLocalColor(2, color(0)); 
  
    
    
@@ -327,7 +330,7 @@
   // Escritura de la fecha y hora
   fill(31, 125, 222);  // Determinamos color de la letra
   textFont(font22);  // Determinamos tipo de fuente
-  text(curr_date, 25, 30);  // Imprimimos el contenido de la variable y lo posicionamos
-  text(curr_time, 250, 30);  // Imprimimos el contenido de la variable y lo posicionamos
+  text(curr_date, 75, 30);  // Imprimimos el contenido de la variable y lo posicionamos
+  text(curr_time, 300, 30);  // Imprimimos el contenido de la variable y lo posicionamos
   
   }

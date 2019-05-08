@@ -1,6 +1,11 @@
  
  public void handleButtonEvents(GButton button, GEvent event) {  
  
+  // If Button OFF is pushed
+  if ( button == botonOFF && event == GEvent.CLICKED){
+    exit();
+  }
+  
   // If Button CAMARA is pushed
   if ( button == botonC && event == GEvent.CLICKED){
     IF_Camara=true;

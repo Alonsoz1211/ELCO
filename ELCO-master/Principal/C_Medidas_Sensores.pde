@@ -1,13 +1,17 @@
   
     void sensoresArduino(boolean Hum, boolean Temp, boolean Luz) {
    
-      port.write('E');
-      delay(100);
-
+      textSize(30);
+      fill(0, 255, 0);
+      text("Temperature and Humidity", 270, 50);
+      
+      textSize(30);
+      fill(0, 255, 0);
+      text("% of Light", (950/2)-50, 50+400);
       
         if (port.available() > 0) {
           String val = port.readString();
-          float[] list = float(split(val, ':'));
+          float[] list = float(split(val, ' '));
           
           if(list.length>2){
             if(Temp){
@@ -23,16 +27,13 @@
             humActual = 0;
             }
             if(Luz){
-            luxActual = list[2];
+            lightActual = list[2];
             }
             if(!Luz){
-            luxActual = 0;
+            lightActual = 0;
             }
             
-            lightActual = ((float)luxActual)/65535*100;
-            
             println("Temperature: " + tempActual + " C  " + "Humidity: " + humActual + " %" + " Light " + lightActual + " %");
-            println("luxActual = " + luxActual);
             
             if(!ARDUINOperiodico || SENSORES){
                 m.updateMeter(int(tempActual));
@@ -42,9 +43,6 @@
             
           }else{
           println("Error reading the sensors");
-          m.updateMeter(int(tempActual));
-          m2.updateMeter(int(humActual));
-          m3.updateMeter(int(lightActual));
           }
           
         delay(1000);
