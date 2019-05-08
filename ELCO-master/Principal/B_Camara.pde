@@ -1,22 +1,21 @@
-import processing.video.*;
 
-Capture cam; 
+/* Captura de video de la Pi NoIR Camera V2 */
+GLCapture video;
 PImage img;
 
 
-
-void camara(Capture cam, PImage img) {
+void camara(GLCapture video, PImage img) {
 
   setupDone++;
 
-  if (cam.available() == true) {
-    img.copy(cam, 0, 0, cam.width, cam.height, 40, 50, 600, 380);
+  if (video.available() == true) {
+    img.copy(video, 0, 0, video.width, video.height, 40, 50, 600, 380);
     img.updatePixels();
-    cam.read();
+    video.read();
   }
 
   loadPixels();
-  cam.loadPixels();
+  video.loadPixels();
   img.loadPixels(); 
 
   /* Inicializamos las Matrices Contenedoras */
@@ -48,7 +47,7 @@ void camara(Capture cam, PImage img) {
     /* Indicamos el NDVIMedio */
     textSize(28);
     fill(0); //Color Negro (RGB)
-    text("Average NDVI: " + NDVIMedio, 25, height-15);
+    text("NDVI Medio: " + NDVIMedio, 25, height-15);
   }
 }
 

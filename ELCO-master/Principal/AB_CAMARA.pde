@@ -4,7 +4,7 @@
    background(255, 255, 255);  // Color de fondo pantalla
 
 
-    camara(cam,img);
+    camara(video,img);
 
     
     //Mostramos, ocultamos y coloreamos los botones
@@ -46,7 +46,7 @@
         CAMARA=false;
         CAMARA=true;
         setupDone=0;
-        cam.stop();
+        video.close();
         IF_Camara=false;
       }
         */
@@ -57,7 +57,7 @@
          // Por si coincide con una medida periodica
           if(!NDVIperiodico){
             setupDone=0;
-            cam.stop();
+            video.close();
           }
           
         IF_Sensores=false;
@@ -70,7 +70,7 @@
          // Por si coincide con una medida periodica
           if(!NDVIperiodico){
             setupDone=0;
-            cam.stop();
+            video.close();
           }
         
         IF_Historial=false;
@@ -83,7 +83,7 @@
          // Por si coincide con una medida periodica
           if(!NDVIperiodico){
             setupDone=0;
-            cam.stop();
+            video.close();
           }
           
         IF_About=false;

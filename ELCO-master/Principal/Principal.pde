@@ -1,4 +1,4 @@
-import processing.video.*;
+import gohai.glvideo.*;
 import processing.core.*;
 import processing.serial.*;    
 import grafica.*;
@@ -129,7 +129,8 @@ void setup() {
   /* SETUP INTERFAZ */
   
       // Creamos interface del tamaño máximo de la pantalla
-      size(800, 480);  
+      //size(800, 480, P2D);
+      fullScreen(P2D);
       
       // Creamos la PImage del logo
       logoPLANTHY=loadImage("LOGO_PLANTHY.jpg");  // Cargamos imagen en la varibale
@@ -154,17 +155,17 @@ void setup() {
   /* SETUP BOTONES */
   
       // Initialize Buttons
-      botonC = new GButton(this, width-buttonSize, 0, buttonSize, buttonSize, "CAMERA"); 
-      botonS = new GButton(this, width-buttonSize, buttonSize, buttonSize, buttonSize, "SENSORS");
-      botonH = new GButton(this, width-buttonSize, buttonSize*2, buttonSize, buttonSize, "HISTOGRAM"); 
+      botonC = new GButton(this, width-buttonSize, 0, buttonSize, buttonSize, "CAMARA"); 
+      botonS = new GButton(this, width-buttonSize, buttonSize, buttonSize, buttonSize, "SENSORES");
+      botonH = new GButton(this, width-buttonSize, buttonSize*2, buttonSize, buttonSize, "HISTORIAL"); 
       botonA = new GButton(this, width-buttonSize, buttonSize*3, buttonSize, buttonSize, "ABOUT");
       botonGNDVI = new GButton(this, 0, height-button2Height, button2Width, button2Height, "NDVI");
-      botonGHum = new GButton(this, button2Width, height-button2Height, button2Width, button2Height, "HUMIDITY");
-      botonGTemp = new GButton(this, button2Width*2, height-button2Height, button2Width, button2Height, "TEMPERATURE");
-      botonGLuz = new GButton(this, button2Width*3, height-button2Height, button2Width, button2Height, "LIGHT");
-      boton24HORAS = new GButton(this, width-buttonSize-button3Width*3.5, 5, button3Width, button3Width, "24 H");
-      boton7DIAS = new GButton(this, width-buttonSize-button3Width*2.5, 5, button3Width, button3Width, "7 DAYS");
-      boton30DIAS = new GButton(this, width-buttonSize-button3Width*1.5, 5, button3Width, button3Width, "30 DAYS");
+      botonGHum = new GButton(this, button2Width, height-button2Height, button2Width, button2Height, "HUMEDAD");
+      botonGTemp = new GButton(this, button2Width*2, height-button2Height, button2Width, button2Height, "TEMPERATURA");
+      botonGLuz = new GButton(this, button2Width*3, height-button2Height, button2Width, button2Height, "LUZ");
+      boton24HORAS = new GButton(this, width-buttonSize-button3Width*3.5, 5, button3Width, button3Width, "24 HORAS");
+      boton7DIAS = new GButton(this, width-buttonSize-button3Width*2.5, 5, button3Width, button3Width, "7 DIAS");
+      boton30DIAS = new GButton(this, width-buttonSize-button3Width*1.5, 5, button3Width, button3Width, "30 DIAS");
       botonOFF = new GButton(this, 5, 5, button3Width/2, button3Width/2, "○");
   
   
@@ -178,7 +179,7 @@ void setup() {
       plotNDVI.setXLim(0,30);
       plotNDVI.setYLim(-1,1);
       plotNDVI.getTitle().setText("NDVI");
-      plotNDVI.getXAxis().getAxisLabel().setText(" Time (s)");
+      plotNDVI.getXAxis().getAxisLabel().setText(" Tiempo (s)");
       plotNDVI.getYAxis().getAxisLabel().setText("NDVI");
       plotNDVI.setBoxBgColor(color(211, 242, 247));
      
@@ -188,9 +189,9 @@ void setup() {
       plotHum.setDim(525,300);
       plotHum.setXLim(0,24);
       plotHum.setYLim(0,100);
-      plotHum.getTitle().setText("HUMIDITY 24 HOURS");
-      plotHum.getXAxis().getAxisLabel().setText(" Time (s)");
-      plotHum.getYAxis().getAxisLabel().setText("Humidity (%)");
+      plotHum.getTitle().setText("HUMEDAD 24 HORAS");
+      plotHum.getXAxis().getAxisLabel().setText(" Tiempo (s)");
+      plotHum.getYAxis().getAxisLabel().setText("Humedad (Unidad)");
       plotHum.setBoxBgColor(color(211, 242, 247));
       
       // Initialize PlotHum7
@@ -199,9 +200,9 @@ void setup() {
       plotHum7.setDim(525,300);
       plotHum7.setXLim(0,7);
       plotHum7.setYLim(0,100);
-      plotHum7.getTitle().setText("HUMIDITY 7 DAYS");
-      plotHum7.getXAxis().getAxisLabel().setText(" Time (s)");
-      plotHum7.getYAxis().getAxisLabel().setText("Humidity (%)");
+      plotHum7.getTitle().setText("HUMEDAD 7 DIAS");
+      plotHum7.getXAxis().getAxisLabel().setText(" Tiempo (s)");
+      plotHum7.getYAxis().getAxisLabel().setText("Humedad (Unidad)");
       plotHum7.setBoxBgColor(color(211, 242, 247));
       
       // Initialize PlotHum30
@@ -210,9 +211,9 @@ void setup() {
       plotHum30.setDim(525,300);
       plotHum30.setXLim(0,30);
       plotHum30.setYLim(0,100);
-      plotHum30.getTitle().setText("HUMIDITY 30 DAYS");
-      plotHum30.getXAxis().getAxisLabel().setText(" Time (s)");
-      plotHum30.getYAxis().getAxisLabel().setText("Humidity (%)");
+      plotHum30.getTitle().setText("HUMEDAD 30 DIAS");
+      plotHum30.getXAxis().getAxisLabel().setText(" Tiempo (s)");
+      plotHum30.getYAxis().getAxisLabel().setText("Humedad (Unidad)");
       plotHum30.setBoxBgColor(color(211, 242, 247));
       
       // Initialize PlotTemp
@@ -221,9 +222,9 @@ void setup() {
       plotTemp.setDim(525,300);
       plotTemp.setXLim(0,24);
       plotTemp.setYLim(-10,80);
-      plotTemp.getTitle().setText("TEMPERATURE 24 HOURS");
-      plotTemp.getXAxis().getAxisLabel().setText(" Time (s)");
-      plotTemp.getYAxis().getAxisLabel().setText("Temperature (ºC)");
+      plotTemp.getTitle().setText("TEMPERATURA 24 HORAS");
+      plotTemp.getXAxis().getAxisLabel().setText(" Tiempo (s)");
+      plotTemp.getYAxis().getAxisLabel().setText("Temperatura (ºC)");
       plotTemp.setBoxBgColor(color(211, 242, 247));
       
       // Initialize PlotTemp7
@@ -232,9 +233,9 @@ void setup() {
       plotTemp7.setDim(525,300);
       plotTemp7.setXLim(0,7);
       plotTemp7.setYLim(-10,80);
-      plotTemp7.getTitle().setText("TEMPERATURE 7 DAYS");
-      plotTemp7.getXAxis().getAxisLabel().setText(" Time (s)");
-      plotTemp7.getYAxis().getAxisLabel().setText("Temperature (ºC)");
+      plotTemp7.getTitle().setText("TEMPERATURA 7 DIAS");
+      plotTemp7.getXAxis().getAxisLabel().setText(" Tiempo (s)");
+      plotTemp7.getYAxis().getAxisLabel().setText("Temperatura (ºC)");
       plotTemp7.setBoxBgColor(color(211, 242, 247));
       
       // Initialize PlotTemp30
@@ -243,9 +244,9 @@ void setup() {
       plotTemp30.setDim(525,300);
       plotTemp30.setXLim(0,30);
       plotTemp30.setYLim(-10,80);
-      plotTemp30.getTitle().setText("TEMPERATURE 30 DAYS");
-      plotTemp30.getXAxis().getAxisLabel().setText(" Time (s)");
-      plotTemp30.getYAxis().getAxisLabel().setText("Temperature (ºC)");
+      plotTemp30.getTitle().setText("TEMPERATURA 30 DIAS");
+      plotTemp30.getXAxis().getAxisLabel().setText(" Tiempo (s)");
+      plotTemp30.getYAxis().getAxisLabel().setText("Temperatura (ºC)");
       plotTemp30.setBoxBgColor(color(211, 242, 247));
     
       // Initialize PlotLuz
@@ -254,9 +255,9 @@ void setup() {
       plotLuz.setDim(525,300);
       plotLuz.setXLim(0,24);
       plotLuz.setYLim(0,100);
-      plotLuz.getTitle().setText("LIGHT 24 HOURS");
-      plotLuz.getXAxis().getAxisLabel().setText(" Time (s)");
-      plotLuz.getYAxis().getAxisLabel().setText("Ligth (%)");
+      plotLuz.getTitle().setText("LUZ 24 HORAS");
+      plotLuz.getXAxis().getAxisLabel().setText(" Tiempo (s)");
+      plotLuz.getYAxis().getAxisLabel().setText("Luz (Unidad)");
       plotLuz.setBoxBgColor(color(211, 242, 247));
       
       // Initialize PlotLuz7
@@ -265,9 +266,9 @@ void setup() {
       plotLuz7.setDim(525,300);
       plotLuz7.setXLim(0,7);
       plotLuz7.setYLim(0,100);
-      plotLuz7.getTitle().setText("LIGHT 7 DAYS");
-      plotLuz7.getXAxis().getAxisLabel().setText(" Time (s)");
-      plotLuz7.getYAxis().getAxisLabel().setText("Ligth (%)");
+      plotLuz7.getTitle().setText("LUZ 7 DIAS");
+      plotLuz7.getXAxis().getAxisLabel().setText(" Tiempo (s)");
+      plotLuz7.getYAxis().getAxisLabel().setText("Luz (Unidad)");
       plotLuz7.setBoxBgColor(color(211, 242, 247));
       
       // Initialize PlotLuz30
@@ -276,15 +277,15 @@ void setup() {
       plotLuz30.setDim(525,300);
       plotLuz30.setXLim(0,30);
       plotLuz30.setYLim(0,100);
-      plotLuz30.getTitle().setText("LIGHT 30 DAYS");
-      plotLuz30.getXAxis().getAxisLabel().setText(" Time (s)");
-      plotLuz30.getYAxis().getAxisLabel().setText("Ligth (%)");
+      plotLuz30.getTitle().setText("LUZ 30 DIAS");
+      plotLuz30.getXAxis().getAxisLabel().setText(" Tiempo (s)");
+      plotLuz30.getYAxis().getAxisLabel().setText("Luz (Unidad)");
       plotLuz30.setBoxBgColor(color(211, 242, 247));
   
   
       /*SETUP MEDIDAS PROCEDENTES ARDUINO*/
       
-      port = new Serial(this, "/dev/cu.usbserial-AL03MSOB", 9600);                                    //Puerto serie Arduino
+      //port = new Serial(this, "/dev/cu.usbserial-AL03MSOB", 9600);                                    //Puerto serie Arduino
       
          fill(120, 50, 0);
         m = new Meter(this, 20, 60);
@@ -388,7 +389,7 @@ void draw() {
       
         if(setupDone==0){
               
-              String[] cameras = Capture.list();
+              String[] cameras = GLCapture.list();
               img = createImage(width, height, RGB);
               
               if (cameras.length == 0) {
@@ -400,8 +401,8 @@ void draw() {
                 for (int i = 0; i < cameras.length; i++) {
                   println(cameras[i]);
                 }
-                cam = new Capture(this, cameras[0]);
-                cam.start(); 
+                video = new GLCapture(this, cameras[0]);
+                video.start(); 
               }
             }
                 

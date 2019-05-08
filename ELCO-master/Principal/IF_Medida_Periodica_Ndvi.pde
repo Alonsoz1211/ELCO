@@ -10,7 +10,7 @@
       // Hacemos el setup de la camara si no esta hecho
       
           if(setupDone==0){
-            String[] cameras = Capture.list();
+            String[] cameras = GLCapture.list();
             img = createImage(width, height, RGB);
               if (cameras.length == 0) {
                 println("No hay cámaras conectadas!");
@@ -20,12 +20,12 @@
                 for (int i = 0; i < cameras.length; i++) {
                 println(cameras[i]);
               }
-            cam = new Capture(this, cameras[0]);
-            cam.start(); 
+            video = new GLCapture(this, cameras[0]);
+            video.start(); 
             }
           }
           
-        camara(cam,img);                                            //Llamamos a la funcion camara
+        camara(video,img);                                            //Llamamos a la funcion camara
         //println("ndvi.txt",  DD_MM_YY[0] + "/" + DD_MM_YY[1] + "/" + DD_MM_YY[2] + "   " + PC_Time[0] + ":" + PC_Time[1] + "   " + NDVIMedio);
           if(PC_Time[2] == 30){                                     //Tomamos la medida a los 30 segundos de que se abra la camara (estabilidad)
             medidoNDVI = true;                                      //Activamos el Flag de que el NDVI ha sido medido
@@ -34,7 +34,7 @@
             println(NDVIMedioString);
             
               if(!CAMARA){                                          //Si en este momento no estamos en la pestaña de camara
-                cam.stop();                                         //Se para la camara
+                video.close();                                         //Se para la camara
                 setupDone = 0;                                      //Y se indica que no hay hecho setup
               }
          
