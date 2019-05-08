@@ -48,7 +48,7 @@ void camara(Capture cam, PImage img) {
     /* Indicamos el NDVIMedio */
     textSize(28);
     fill(0); //Color Negro (RGB)
-    text("NDVI Medio: " + NDVIMedio, 25, height-15);
+    text("Average NDVI: " + NDVIMedio, 25, height-15);
   }
 }
 
